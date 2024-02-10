@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | AidiT</title>
+    <link rel="shortcut icon" href="/static/img/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+
+<body>
+
+
+    <div id="navbar">
+        <nav class="flex justify-between px-20 pt-9 pb-7 items-center bg-white">
+            <h1 class="text-3xl text-gray-800 font-bold">AidiT</h1>
+            <div class="flex items-center">
+                <div class="flex items-center px-2 mr-8" style="border-bottom: 1px solid black; border-radius: 5px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pt-0.5 text-gray-600" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input class="ml-2 py-1 outline-none bg-transparent font-" type="text" name="search" id="search"
+                        placeholder="Search..." />
+                </div>
+                <ul class="flex items-center space-x-8">
+                    <li class="font-semibold text-gray-700" style="border-bottom: 3px solid gray;">
+                        <a href="/dash/" class="pb-1">Home</a>
+                    </li>
+                    <li class="font-semibold text-gray-700">
+                        <a href="/">Upload</a>
+                    </li>
+                    <li>
+                        <a href="/profile">
+                            <svg fill="#000000" class="w-7 h-7" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier"> 
+                                    <g>
+                                        <g>
+                                            <path d="M256,0C114.836,0,0,114.836,0,256c0,55.849,17.988,107.567,48.454,149.692c0.197,0.897,0.479,1.781,0.94,2.625 c0.945,1.719,2.332,3.026,3.937,3.897C100.187,472.863,173.601,512,256,512c141.163,0,256-114.837,256-256 C512,114.836,397.163,0,256,0z M256,492.308c-73.255,0-138.832-33.507-182.212-86.003c47.187-24.817,128.284-62.291,129.164-62.7 c2.423-1.115,4.289-3.173,5.163-5.683c0.885-2.519,0.712-5.279-0.481-7.663c-13.144-26.289-44.01-102.615-29.202-139.635 c0.289-0.721,0.491-1.481,0.606-2.26l9.606-67.231c3.702-6.663,14.154-21.327,26.029-22.587 c7.923-0.808,16.625,4.462,25.692,15.808c1.875,2.336,4.702,3.692,7.692,3.692c3.212,0,78.769,1.01,78.769,88.615 c0,1.058,0.173,2.106,0.51,3.115l9.846,29.538c0.077,0.24,7.625,24.048-17.317,49c-1.077,1.077-1.894,2.394-2.375,3.846 l-9.846,29.539c-1.183,3.538-0.259,7.442,2.375,10.077c2.389,2.399,57.406,56.853,124.505,78.882 C391.163,460.644,327.209,492.308,256,492.308z M328.308,321.99l7.144-21.452c31.423-32.904,20.885-66.029,20.404-67.452 l-9.346-28.048c-0.846-91.683-73.894-104.587-93.606-106.394c-12.712-14.538-26.241-21.163-40.308-19.683 c-25.587,2.712-40.635,31.423-42.269,34.683c-0.471,0.942-0.788,1.961-0.942,3.01l-9.683,67.808 c-16.635,44.202,14.115,119.308,25.99,145.452c-23.195,10.813-85.772,40.233-123.95,60.479 c-26.495-38.183-42.05-84.5-42.05-134.392c0-130.298,106.01-236.308,236.308-236.308S492.308,125.702,492.308,256 c0,51.517-16.584,99.228-44.676,138.101C392.462,378.32,342.937,335.498,328.308,321.99z"></path> 
+                                        </g> 
+                                    </g> 
+                                </g>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    {% if messages %}
+        <div class="alerts-list absolute right-0 mr-4">
+            {% for message in messages %}
+                <div onclick="this.style.display='none';" class="p-2 bg-blue-200 text-blue-800 cursor-pointer p-4 text-sm rounded border border-blue-300 my-3">
+                    {{message}}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="font-bold italic text-2xl mt-4 mb-1 text-gray-700 ml-16 xs:ml-1">
+        Your Edits
+    </div>
+    {% csrf_token %}
+
+    <div>
+        <div class="bg-white py-2 sm:py-3">
+            <div class="mx-auto max-w-7xl px-6 lg:px-8">
+                <ul role="list"
+                    class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-0 gap-y-0 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+                    {% for image in context %}
+                    <li v-for="person in people" :key="person.name" id="F_{{image.id}}">
+                        <ul role="list" class="mt-2 flex gap-x-2">
+                            <div class="m-2 space-y-2">
+                                <div class="group flex flex-col gap-1 rounded-lg p-5 text-gray" tabindex="1">
+                                    <div style="width:320px;"
+                                        class="group relative m-0 flex h-72 w-72 rounded-xl ring-gray-900/5 sm:mx-auto sm:max-w-lg">
+                                        <div
+                                            class="z-10 h-full w-full overflow-hidden rounded-xl border border-gray-200 opacity-80 transition duration-300 ease-in-out group-hover:opacity-100 dark:border-gray-700 dark:opacity-70">
+                                            <img src="/{{image.image}}"
+                                                class="animate-fade-in block h-full w-full scale-100 transform object-cover object-center opacity-100 transition duration-300 group-hover:scale-110"
+                                                alt="{{image.image}}" />
+                                        </div>
+                                        <div style="background-color: gray; width:70%;"
+                                            class="p-3 cursor-pointer rounded-xl opacity-60 absolute bottom-0 z-20 m-0 pb-4 ps-4 transition duration-300 ease-in-out group-hover:-translate-y-1 group-hover:translate-x-3 group-hover:scale-110 group-hover:opacity-100">
+                                            <h2 class="text-lg font-bold text-yellow-300" style="overflow-x: hidden;">
+                                                {{image.name}}</h2>
+                                            <h2 class="text-m font-light text-white">
+                                                <a href="/edit/{{image.id}}/" class="hover:text-green-400">Edit</a> |
+                                                <button class="hover:text-red-400"
+                                                    onclick="deletePhotoModalHandler('{{image.id}}' , '{{image.name}}');">Delete</button> | 
+                                                <a href="/{{image.image}}" class="hover:text-yellow-400" download="{{image.image}}">Download</a>
+                                            </h2>
+                                        </div>
+
+                                    </div>
+
+                                    <div
+                                        class="invisible h-auto max-h-0 p-5 items-center opacity-0 transition-all group-focus:visible group-focus:max-h-screen group-focus:opacity-100 group-focus:duration-1000">
+
+                                        <p style="font-size: .9em;" v-html="{{image.name}}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <dialog id="delete_modal" close>
+        <div class="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover"
+            id="modal-id">
+            <div class="absolute bg-black opacity-80 inset-0 z-0"></div>
+            <div class="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white ">
+
+                <div class="">
+
+                    <div class="text-center p-5 flex-auto justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="w-4 h-4 -m-1 flex items-center text-red-500 mx-auto" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 flex items-center text-red-500 mx-auto"
+                            viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <h2 class="text-xl font-bold py-4 ">Are you sure?</h3>
+                            <p class="text-sm text-gray-500 px-8">
+                                Do you really want to delete <span id="itr_text" class="font-semibold"></span>?
+                                This process cannot be undone</p>
+                            <p class="text-sm test-red-600" id="err_msg"></p>
+                    </div>
+             
+                    <div class="p-3  mt-2 text-center space-x-4 md:block">
+                        <button onclick="delete_modal.close()"
+                            class="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100">
+                            Cancel
+                        </button>
+                        <button onclick="deletePhoto()"
+                            class="mb-2 md:mb-0 bg-red-500 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-600">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="delete_modal_btn_id_value">
+    </dialog>
+
+    <script src="/static/js/dash.js"></script>
+
+</body>
+
+</html>

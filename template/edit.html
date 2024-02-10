@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor | AidiT</title>
+    <link rel="shortcut icon" href="/static/img/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/edit.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script src="https://unpkg.com/flmngr"></script>
+</head>
+
+<body>
+    {% csrf_token %}
+    <div id="loading" style="font-size:12px; text-align: center; margin-top: 40px;">Loading editor...</div>
+
+    <button class="px-4 py-2 hover:opacity-[0.7] left-[45%] right-[45%] mt-1"
+        style="background-color: black; color: white; position: fixed; top: 0; z-index: 999999;" id="btn-ai-btn"
+        onclick="ai_img_update_prompt_modal.showModal()">AI Magic</button>
+
+    <dialog id="ai_img_update_prompt_modal" close>
+        <div class="flex bg-yellow-200">
+            <div class="relative flex justify-center max-w-xl py-4 m-auto shadow-2xl">
+                <div class="w-2/5 ml-4" id="img_to_show"
+                    style=" background-image: url('/{{context.image}}'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+                </div>
+                <div style="border-left: 1px solid black; margin-left: 8px;"
+                    class="flex flex-col justify-between w-3/5 px-4 space-y-10">
+                    <div>
+                        <h1 class="text-2xl font-bold leading-tight text-purple-500">
+                            Ideas and prompts to edit your photo
+                        </h1>
+                        <p id="err_msg" class="font-semibold text-blue-500 text-xs"></p>
+                    </div>
+                    <div>
+                        <div>
+                            <textarea required id="prompt_data" rows="6" name="prompt_data"
+                                class="w-full py-1 px-2 border rounded focus:border-blue-500 focus:outline-none"
+                                placeholder="Type your ideas"></textarea>
+                            <input id="negative_prompt" name="negative_prompt" placeholder="Negative prompts.."
+                                class="w-full py-1 px-2 border rounded focus:border-blue-500 focus:outline-none">
+                            <button onclick="sendAIPhotoGenReq()"
+                                class="block w-full py-3 mt-3 text-white bg-green-500 rounded shadow-lg hover:bg-green-600"
+                                type="button">
+                                Edit with AI
+                            </button>
+                        </div>
+                        <ul class="flex justify-center mt-4 space-x-3 text-xs text-gray-700">
+                            <li class="flex items-center" onclick="ai_img_update_prompt_modal.close()">
+                                <p class="text-white bg-red-500 px-4 py-2 hover:opacity-[0.7] cursor-pointer">Close</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </dialog>
+
+    <div class="text-center mt-[20%]">
+        <a href="/dash/" class="btn bg-rose-500 text-xl text-white py-4 px-5 text-center hover:opacity-[0.7]">Go Home</a>
+    </div>
+
+    <script src="/static/js/edit.js"></script>
+
+    <script>
+        function editImage(handlerFork=false) {
+            Flmngr.edit({
+                url: handlerFork ? aiGenImage() : "/{{context.image}}",
+                onSave: (onExport, onClose) => {
+                    // You can use "onExport" function to export the canvas as many times as you need.
+                    // Call "onClose" function to close the image editor.
+                    onExport("{{context.name}}", "jpg", 95, (imageBlob) => {
+                        // Convert image (Blob object) into Base64
+                        let reader = new FileReader();
+                        reader.onloadend = async () => {
+
+                            if (img_blob_data == null) {
+                                resizeImageBlob(imageBlob).then((resizedBlob) => {
+                                    img_blob_data = resizedBlob;
+                                });
+                            }
+
+                            // let base64 = reader.result;
+
+                            // // Append a new image onto the document
+                            // let elImgNew = document.createElement("img");
+                            // elImgNew.src = base64;
+
+                            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+                            const formData = new FormData();
+                            formData.append("img_file", imageBlob);
+                            formData.append('X-CSRFToken', csrftoken);
+
+                            const imgUpdate = await fetch("/edit/{{context.id}}/", {
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRFToken': csrftoken,
+                                },
+                                body: formData
+                            });
+                            if (imgUpdate.ok && imgUpdate.status === 200) {
+                                const response = await imgUpdate.json();
+                                if (response.msg === 'success') {
+                                    
+                                } else {
+                                    // false
+                                    //onClose()
+                                }
+
+
+                            } else {
+                                alert("Somethiing went wrong")
+                            }
+                        }
+                        reader.readAsDataURL(imageBlob);
+
+                    });
+                },
+                onFail: (error) => {
+                    alert("Error: " + error);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

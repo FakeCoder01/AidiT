@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start a project | AidiT</title>
+    <link rel="shortcut icon" href="/static/img/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/main.css">
+
+    <style>
+        .has-mask {
+            position: absolute;
+            clip: rect(10px, 150px, 130px, 10px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="navbar">   
+        <nav class="flex justify-between px-20 pt-9 pb-7 items-center bg-white">
+            <h1 class="text-3xl text-gray-800 font-bold">AidiT</h1>
+            <div class="flex items-center">
+                <div class="flex items-center px-2 mr-8" style="border-bottom: 1px solid black; border-radius: 5px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pt-0.5 text-gray-600" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input class="ml-2 py-1 outline-none bg-transparent font-" type="text" name="search" id="search"
+                        placeholder="Search..." />
+                </div>
+                <ul class="flex items-center space-x-8">
+                    <li class="font-semibold text-gray-700">
+                        <a href="/dash/">Home</a>
+                    </li>
+                    <li class="font-semibold text-gray-700"  style="border-bottom: 3px solid gray;">
+                        <a href="/"  class="pb-1">Upload</a>
+                    </li>
+                    <li>
+                        <a href="/profile">
+                            <svg fill="#000000" class="w-7 h-7" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier"> 
+                                    <g>
+                                        <g>
+                                            <path d="M256,0C114.836,0,0,114.836,0,256c0,55.849,17.988,107.567,48.454,149.692c0.197,0.897,0.479,1.781,0.94,2.625 c0.945,1.719,2.332,3.026,3.937,3.897C100.187,472.863,173.601,512,256,512c141.163,0,256-114.837,256-256 C512,114.836,397.163,0,256,0z M256,492.308c-73.255,0-138.832-33.507-182.212-86.003c47.187-24.817,128.284-62.291,129.164-62.7 c2.423-1.115,4.289-3.173,5.163-5.683c0.885-2.519,0.712-5.279-0.481-7.663c-13.144-26.289-44.01-102.615-29.202-139.635 c0.289-0.721,0.491-1.481,0.606-2.26l9.606-67.231c3.702-6.663,14.154-21.327,26.029-22.587 c7.923-0.808,16.625,4.462,25.692,15.808c1.875,2.336,4.702,3.692,7.692,3.692c3.212,0,78.769,1.01,78.769,88.615 c0,1.058,0.173,2.106,0.51,3.115l9.846,29.538c0.077,0.24,7.625,24.048-17.317,49c-1.077,1.077-1.894,2.394-2.375,3.846 l-9.846,29.539c-1.183,3.538-0.259,7.442,2.375,10.077c2.389,2.399,57.406,56.853,124.505,78.882 C391.163,460.644,327.209,492.308,256,492.308z M328.308,321.99l7.144-21.452c31.423-32.904,20.885-66.029,20.404-67.452 l-9.346-28.048c-0.846-91.683-73.894-104.587-93.606-106.394c-12.712-14.538-26.241-21.163-40.308-19.683 c-25.587,2.712-40.635,31.423-42.269,34.683c-0.471,0.942-0.788,1.961-0.942,3.01l-9.683,67.808 c-16.635,44.202,14.115,119.308,25.99,145.452c-23.195,10.813-85.772,40.233-123.95,60.479 c-26.495-38.183-42.05-84.5-42.05-134.392c0-130.298,106.01-236.308,236.308-236.308S492.308,125.702,492.308,256 c0,51.517-16.584,99.228-44.676,138.101C392.462,378.32,342.937,335.498,328.308,321.99z"></path> 
+                                        </g> 
+                                    </g> 
+                                </g>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    {% if messages %}
+        <div class="alerts-list absolute right-0 mr-4">
+            {% for message in messages %}
+                <div onclick="this.style.display='none';" class="p-2 bg-blue-200 text-blue-800 cursor-pointer p-4 text-sm rounded border border-blue-300 my-3">
+                    {{message}}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="relative flex items-center justify-center px-4 sm:px-6 lg:px-8 items-center"">
+        <div class="absolute opacity-60 inset-0 z-0"></div>
+        <div class="sm:max-w-lg w-full px-10 bg-white rounded-xl z-10">
+            <div class="text-center">
+                <h2 class="mt-5 text-3xl font-bold text-gray-900">
+                    Edit an Image!
+                </h2>
+            </div>
+            <form class="mt-8 space-y-3" action="/" method="POST" enctype="multipart/form-data">
+                <div class="grid grid-cols-1 space-y-2">
+                    <label class="text-sm font-bold text-gray-500 tracking-wide">Title</label>
+                    <input required name="name"
+                        class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"
+                        type="text" placeholder="Give a name to the project">
+                </div>
+                <div class="grid grid-cols-1 space-y-2 cursor-pointer">
+                    <!-- <label class="text-sm font-bold text-gray-500 tracking-wide">Attach Image</label> -->
+                    <div class="flex items-center justify-center w-full">
+                        <label
+                            class="flex flex-col rounded-lg border-4 border-dashed w-full h-60 p-10 group text-center">
+                            <div
+                                class="h-full w-full text-center flex flex-col items-center justify-center items-center  ">
+                                <div class="flex flex-auto max-h-48 w-2/5 mx-auto -mt-10">
+                                    <img id="img_area" class="has-mask h-36 object-center"
+                                        src="https://img.freepik.com/free-vector/image-upload-concept-landing-page_52683-27130.jpg?size=338&ext=jpg"
+                                        alt="Uploaded image">
+                                </div>
+                                <p class="pointer-none text-gray-500 "><span class="text-sm">Drag and drop</span> image
+                                    here <br /> or select an image from your computer</p>
+                            </div>
+                            <input type="file" class="hidden" name="img_file" id="img_file">
+                        </label>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-400">
+                    <span>File type: jpg, png, types of images</span>
+                </p>
+                <div>
+                    <button type="submit"
+                        class="my-5 w-full flex justify-center bg-blue-500 text-gray-100 p-4  rounded-full tracking-wide
+                                    font-semibold  focus:outline-none focus:shadow-outline hover:bg-blue-600 shadow-lg cursor-pointer transition ease-in duration-300">
+                        Upload
+                    </button>
+                </div>
+                {% csrf_token %}
+            </form>
+        </div>
+    </div>
+
+    <script src="/static/js/index.js"></script>
+
+
+</body>
+
+</html>

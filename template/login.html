@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | AidiT</title>
+    <link rel="shortcut icon" href="/static/img/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+
+
+    <div id="navbar">
+        <nav class="flex justify-between px-20 pt-9 pb-7 items-center bg-white">
+            <h1 class="text-3xl text-gray-800 font-bold">AidiT</h1>
+            <div class="flex items-center">
+                <div class="flex items-center px-2 mr-8" style="border-bottom: 1px solid black; border-radius: 5px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pt-0.5 text-gray-600" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input class="ml-2 py-1 outline-none bg-transparent font-" type="text" name="search" id="search"
+                        placeholder="Search..." />
+                </div>
+                <ul class="flex items-center space-x-8">
+                    <li class="font-semibold text-gray-700">
+                        <a href="/dash/">Home</a>
+                    </li>
+                    <li class="font-semibold text-gray-700">
+                        <a href="/">Upload</a>
+                    </li>
+                    <li class="">
+                        <a href="/signup/" class="hover:bg-yellow-300 bg-orange-400 font-semibold text-white px-4 py-3">Register/Login</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    {% if messages %}
+        <div class="alerts-list absolute right-0 mr-4">
+            {% for message in messages %}
+                <div onclick="this.style.display='none';" class="p-2 bg-blue-200 text-blue-800 cursor-pointer p-4 text-sm rounded border border-blue-300 my-3">
+                    {{message}}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
+    <div class="min-w-screen bg-gray-100 flex items-center justify-center px-5 py-5">
+        <div class="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden" style="max-width:1000px">
+            <div class="md:flex w-full">
+                <div class="hidden md:block w-1/2 bg-indigo-500">
+                    <img src="/static/img/screen.jpg" alt="Girl with book as body">
+                </div>
+                <div class="w-full md:w-1/2 py-10 px-5 md:px-10">
+                    <div class="text-center mb-10">
+                        <h1 class="font-bold text-3xl text-gray-900">LOGIN to AidiT</h1>
+                        <p>Login to view your projects</p>
+                    </div>
+                    <form method="POST" action="/login/">
+                        <div>
+                            <div class="flex -mx-3">
+                                <div class="w-full px-3 mb-5">
+                                    <label for="" class="text-xs font-semibold px-1">Username</label>
+                                    <div class="flex">
+                                        <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                            <svg fill="none" class="w-6 text-gray-400 mx-auto" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                            </svg>
+                                        </div>
+                                        <input name="username" type="text" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="Enter a username">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex -mx-3">
+                                <div class="w-full px-3 mb-12">
+                                    <label for="" class="text-xs font-semibold px-1">Password</label>
+                                    <div class="flex">
+                                        <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                            <svg fill="none" class="w-6 text-gray-400 mx-auto" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                            </svg>
+                                        </div>
+                                        <input name="password" type="password" class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500" placeholder="************">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex -mx-3">
+                                <div class="w-full px-3 mb-5">
+                                    <button class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">LOGIN NOW</button>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                Don't have an account? <a href="/signup/" class="text-pink-500 font-semibold italic">Create a new account</a>
+                            </div>
+                        </div>
+                        {% csrf_token %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+</body>
+</html>
